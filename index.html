@@ -3,537 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Militia 2 - Us Version | By Shishir Da</title>
-
-    <!-- Google Fonts: Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>Mini Militia2 Us By Shishir Da</title>
+    <!-- Load Google Font: Play -->
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Configure Tailwind to use Play font and define custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Set 'Play' as the primary font
+                        sans: ['Play', 'sans-serif'],
+                    },
+                    colors: {
+                        'accent-yellow': '#FDBA31', // Bright yellow/orange from design
+                        'accent-red': '#DC2626',   // Deep red for hover (User preference)
+                        'dark-overlay': 'rgba(2, 6, 23, 0.75)', // Dark blue/gray for overlay
+                        'dark-green-overlay': 'rgba(30, 41, 59, 0.8)', // Dark green tint for overlay
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* --- General Setup & Variables --- */
-        :root {
-            --primary-color: #34940d;
-            --accent-color: #33ff33;
-            --text-color: #ffffff;
-            --bg-color-dark: #1a183e;
-            --frame-border-radius: 20px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #020c05;
-            background-image: url('https://yoamishishir.github.io/mini-militia2-us-apk/bg.jpg'); /* Using the provided image */
+        /* Custom styles for the hero section background image and overlay */
+        .hero-background {
+            /* Using a placeholder URL that visually matches the soldier/military theme */
+            background-image: url('bg1.jpg');
+            backdrop-filter: blur(8px);
             background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            overflow-x: hidden;
-        }
-
-        /* --- Monitor Frame --- */
-        .monitor-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1400px;
-        }
-
-        .monitor-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: var(--frame-border-radius);
-            padding: 1.5rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .monitor-screen {
-            position: relative;
-            width: 100%;
-            min-height: 70vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            /* Flex center for content alignment */
             display: flex;
             flex-direction: column;
-            border-radius: calc(var(--frame-border-radius) - 10px);
-            overflow: hidden; /* Important for bottom bar's rounded corners */
+            /* justify-content: center; */
+            align-items: center;
+            position: relative; /* Needed for the overlay */
+            padding-top: 22%; /* Space for fixed navbar */
         }
-
-        .monitor-stand {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20%;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-top: none;
-        }
-        
-        .monitor-stand::before {
+        /* Custom overlay to darken the image and add a slight green tint */
+        .hero-background::before {
             content: '';
             position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 5px 5px 0 0;
-        }
-
-        /* --- Decorative Frames & Checkmarks --- */
-        .framed-box {
-            position: relative;
-            border: 1px solid var(--accent-color);
-        }
-
-        .framed-box::before {
-            content: '\f00c'; /* Font Awesome check icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            width: 28px;
-            height: 28px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #000;
-            font-size: 14px;
-            box-shadow: 0 0 15px var(--accent-color);
-            z-index: 2;
-        }
-
-        /* Positioning for each checkmark */
-        .frame-top-left::before { top: -15px; left: -15px; }
-        .frame-top-right::before { top: -15px; right: -15px; }
-        .frame-top-center::before { top: -15px; left: 50%; transform: translateX(-50%); }
-        .frame-bottom-right::before { bottom: -15px; right: -15px; }
-        
-        /* --- Header --- */
-        .site-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 2rem 3rem;
-            gap: 2rem;
-        }
-
-        .header-group {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .main-nav ul, .user-nav ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 2.5rem;
-        }
-        
-        .main-nav a, .user-nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .main-nav a:hover, .user-nav a:hover {
-            color: var(--primary-color);
-        }
-
-        .main-nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
+            top: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(5px) brightness(35%);
+            z-index: 1;
         }
 
-        .user-nav .cart-icon {
-            position: relative;
-        }
-        .user-nav .cart-icon::after {
-            content: '2';
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background-color: red;
-            color: white;
-            font-size: 10px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 600;
-        }
-        
-        .mobile-nav-toggle { display: none; } /* Hidden on desktop */
-        
-        /* --- Hero Section --- */
-        .hero {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem 1rem;
-        }
-
+        /* Ensure content is above the overlay */
         .hero-content {
-            max-width: 650px;
-            padding: 3rem;
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
+        /* Custom styles for aesthetic modal */
+        #customModal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-content {
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 450px;
-            margin: 0 auto 2.5rem auto;
-            line-height: 1.6;
-            opacity: 0.9;
+        /* Responsive font sizing for the main title */
+        .hero-title {
+            font-size: 2.25rem; /* text-4xl on mobile */
         }
-
-        .hero .btn {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            padding: 0.9rem 2.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .hero .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* --- Social Links --- */
-        .social-links {
-            position: absolute;
-            top: 50%;
-            right: 1.5rem;
-            transform: translateY(-50%);
-        }
-        
-        .social-links ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            padding: 2rem 0.8rem;
-        }
-
-        .social-links a {
-            color: var(--text-color);
-            font-size: 1.2rem;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: scale(1.2);
-        }
-
-        /* --- Bottom Bar --- */
-        .monitor-bottom-bar {
-            background-color: var(--primary-color);
-            height: 70px;
-            width: 100%;
-            margin-top: auto; /* Pushes to the bottom of flex container */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bottom-logo-svg {
-            stroke: var(--text-color);
-            stroke-width: 3;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* --- Responsive Design --- */
-        
-        /* Tablets and smaller desktops */
-        @media (max-width: 1200px) {
-            body {
-                align-items: flex-start;
-                padding-top: 5rem;
-            }
-            .hero h1 {
-                font-size: 3rem;
-            }
-            .site-header {
-                padding: 1.5rem;
-            }
-            .header-group {
-                gap: 1.5rem;
-            }
-            .main-nav ul, .user-nav ul {
-                gap: 1.5rem;
-            }
-            .social-links {
-                right: 0.5rem;
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.75rem; /* text-6xl on desktop */
             }
         }
-        
-        /* Mobile Devices */
-        @media (max-width: 768px) {
-            body {
-                background-attachment: scroll; /* Fix background on mobile */
-                padding: 0;
-                display: block;
-            }
-
-            /* Remove monitor effect on mobile */
-            .monitor-wrapper {
-                padding: 0;
-            }
-            .monitor-container {
-                background: none;
-                border: none;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border-radius: 0;
-                padding: 0;
-                box-shadow: none;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
-            .monitor-screen {
-                border-radius: 0;
-                min-height: auto;
-                flex-grow: 1;
-            }
-            .monitor-stand {
-                display: none;
-            }
-            .framed-box {
-                border: none; /* Remove frames on mobile */
-            }
-            .framed-box::before {
-                display: none; /* Remove checkmarks on mobile */
-            }
-
-            /* Mobile Header & Nav */
-            .site-header {
-                padding: 1.5rem;
-                align-items: center;
-            }
-            .header-group--left {
-                flex-grow: 1;
-                justify-content: space-between;
-                padding: 0;
-            }
-            /* .header-group--right {
-                display: none; /* Hide user nav on mobile for simplicity, could be moved into menu */
-            } */
-            .mobile-nav-toggle {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--text-color);
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-            .main-nav {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100%;
-                background: rgba(10, 10, 30, 0.9);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                transition: left 0.35s ease-in-out;
-                z-index: 1000;
-                display: flex;
-                flex-direction: column;
-                padding: 2rem;
-            }
-            .main-nav.is-open {
-                left: 0;
-            }
-            .main-nav ul {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2rem;
-                margin-top: 3rem;
-            }
-            .main-nav a {
-                font-size: 1.2rem;
-            }
-
-            /* Mobile Hero */
-            .hero {
-                padding: 5rem 1.5rem;
-            }
-            .hero-content {
-                padding: 40px;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-
-            /* Mobile Social links */
-            .social-links {
-                position: static;
-                transform: none;
-                margin: 2rem 0;
-            }
-            .social-links ul {
-                flex-direction: row;
-                justify-content: center;
-                gap: 2rem;
-                padding: 15px 10px;
-            }
-
-            /* Mobile bottom bar */
-            .monitor-bottom-bar {
-                height: 60px;
-                margin-top: auto; /* keep at bottom */
-            }
 
     </style>
 </head>
-<body>
+<body class="font-sans min-h-screen bg-gray-900 text-white">
 
-    <div class="monitor-wrapper">
-        <div class="monitor-container">
-            <div class="monitor-screen">
+    <!-- 1. Navigation Bar (Fixed Top) -->
+    <header class="fixed top-0 left-0 right-0 bg-dark-overlay backdrop-blur-sm z-50 shadow-lg">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo/Site Name -->
+            <a href="#" class="text-2xl font-extrabold tracking-wider text-white">
+              <i class="fa-solid fa-gamepad"></i>&nbsp; Us Version
+            </a>
+            <!-- Profile Button -->
+            <button class="bg-accent-yellow hover:bg-accent-red text-gray-900 font-bold py-2 px-6 rounded-lg transition duration-300 shadow-xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
+                <a href="https://github.com/yoamishishir" target="_blank"><i class="fa-brands fa-github"></i>&nbsp;Profile</a>
+            </button>
+        </nav>
+    </header>
 
-                <!-- Header -->
-                <header class="site-header">
-                    <div class="header-group header-group--left framed-box frame-top-left">
-                        <a href="#" class="logo">Mini Militia 2 - Us APK</a>
-                        
-                        <!-- <nav class="main-nav" id="main-nav">
-                            <ul>
-                                <li><a href="#" class="active">Home</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </nav>
+    <!-- 2. Hero Section (Full Height Background Image) -->
+    <main class="hero-background">
+        <div class="hero-content">
+            <!-- Main Title -->
+            <h1 class="hero-title font-black leading-tight text-white mb-8">
+                <!-- Highlight 'Gamoria' with the accent color -->
+                <span style="display: block;text-align: left;width: 100%;"><span style="display: inline-block;" class="text-accent-yellow block sm:inline">Everything</span> has a purpose.</span>
+                <span style="display: block;text-align: left;font-size: 20px;font-weight: 500; margin-top: 15px; line-height: 33px;"><span class="text-accent-yellow">So what is the purpose of this website?</span> When we get together and want to play the game, the biggest barrier is sharing the game. The purpose of this website is to remove that barrier between <span class="text-accent-yellow">Us</span>!!..</span>
+            </h1>
 
-                        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open navigation">
-                            <i class="fas fa-bars"></i>
-                        </button> -->
-                    </div>
+            <!-- Call-to-Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                
+                <!-- View Demo Button -->
+                <button onclick="downloadAPK('https://github.com/yoamishishir/mini-militia2-us-apk/releases/download/apks/mini-militia-us-version.apk')" class="w-full sm:w-auto bg-accent-yellow hover:bg-accent-red text-gray-900 font-extrabold py-3 px-10 rounded-xl transition duration-300 transform hover:scale-105 shadow-2xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
+                   <i class="fa-brands fa-android"></i>&nbsp; Get Direct APK
+                </button>
 
-                    <div class="header-group header-group--right framed-box frame-top-right">
-                        <nav class="user-nav">
-                            <!-- <ul>
-                                <li><a href="#" aria-label="My Account"><i class="fas fa-user"></i></a></li>
-                                <li><a href="#" class="cart-icon" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#" aria-label="Search"><i class="fas fa-search"></i></a></li> 
-                                <li><a href="#" aria-label="Language"><i class="fas fa-globe"></i></a></li>
-                            </ul> -->
-                            <a href="https://github.com/yoamishishir" target="_blank" class="logo"><i class="fa-brands fa-github"></i>&nbsp;&nbsp; My Profile</a>
-                        </nav>
-                    </div>
-                </header>
-
-                <!-- Main Content -->
-                <main class="hero">
-                    <div class="hero-content framed-box frame-top-center">
-                        <h1>Everything has a purpose.</h1>
-                        <p style="text-align: left;">So what is the purpose of this website? <span style="display: inline-block;padding: 0 10px">When we come together and want to play the game, the biggest barrier is sharing the game. The purpose of this website is to remove that barrier between us!!..</span></p>
-                        <a href="#" target="_blank" class="btn" style="display: inline-block;box-shadow: 1.5px 1.5px 2px #c4e1c6;">Direct Download APK</a>
-                        <br><br>
-                        <a href="https://liteapks.com/download/x8-sandbox-25241/1" target="_blank" class="btn" style="display: inline-block;box-shadow: 1.5px 1.5px 2px #c4e1c6;">X8 Sendbox</a>
-                    </div>
-                </main>
-
-                <!-- Social Links -->
-                <aside class="social-links framed-box frame-bottom-right">
-                    <ul>
-                        <li><a href="https://wa.me/1824904854" target="_blank" aria-label="Instagram"><i class="fa-brands fa-whatsapp"></i></a></li>
-                        <li><a href="https://www.reddit.com/user/yoamishishir" target="_blank" aria-label="Instagram"><i class="fa-brands fa-reddit-alien"></i></a></li>
-                        <li><a href="https://www.linkedin.com/in/threal-shishir" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </aside>
-
-                <!-- Bottom Bar -->
-                <div class="monitor-bottom-bar">
-                    <svg class="bottom-logo-svg" width="60" height="20" viewBox="0 0 60 20">
-                        <path d="M 2 10 C 10 2, 20 2, 28 10 S 46 18, 54 10"></path>
-                    </svg>
-                    &nbsp;&nbsp;
-                    <p>Mini Militia Distribution Media By Shishir Saha 😊</p>
-                </div>
+                <!-- Purchase Now Button -->
+                <button onclick="showVersionModal()" class="w-full sm:w-auto bg-accent-yellow hover:bg-accent-red text-gray-900 font-extrabold py-3 px-10 rounded-xl transition duration-300 transform hover:scale-105 shadow-2xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
+                  <i class="fa-brands fa-redhat"></i>&nbsp;  Virtual Master
+                </button>
             </div>
         </div>
-        <div class="monitor-stand"></div>
+
+    <!-- 3. Footer (Fixed Bottom) -->
+    <footer style="width: 100%;"  class=" absolute bottom-0 bg-accent-yellow text-gray-900 p-4 z-50 shadow-inner">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center text-sm font-semibold">
+            <!-- Copyright Text -->
+            <p class="order-2 sm:order-1 mt-2 sm:mt-0">Mini Militia Distribution Website By<span class="font-black">&nbsp;Shishir Saha 😊</span>
+            </p>
+            
+            <!-- Social Media Icons (Updated with inline-flex for perfect circles) -->
+            <div class="flex space-x-4 order-1 sm:order-2">
+                <!-- Reddit -->
+                <a href="https://www.reddit.com/user/yoamishishir" aria-label="Twitter" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
+                    <i class="fa-brands fa-reddit-alien"></i>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/threal-shishir" aria-label="LinkedIn" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
+                    <i class="fab fa-linkedin-in text-lg"></i>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/1824904854" aria-label="WhatsApp" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    </main>
+
+        <!-- Custom Modal for Question and Results -->
+    <div id="customModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center opacity-0 invisible" aria-modal="true" role="dialog">
+        <div class="modal-content bg-white p-6 rounded-lg shadow-2xl w-full max-w-sm mx-4 relative">
+            
+            <!-- Close Button added here -->
+            <button onclick="hideModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 transition duration-150 p-2 rounded-full hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-gray-800">What is your Android version?</h2>
+            <p id="modalMessage" class="text-gray-600 mb-6">You need Virtual Master when your android version isn't 9 to 13.</p>
+            <div id="modalActions" class="flex justify-between space-x-3">
+                <!-- Buttons will be dynamically updated by JavaScript -->
+            </div>
+        </div>
     </div>
 
+    <!-- No JavaScript is strictly required for this static layout, but if we were to add interaction, it would go here. -->
     <script>
-        // --- Mobile Navigation Toggle Script ---
-        const navMenu = document.getElementById('main-nav');
-        const navToggle = document.getElementById('mobile-nav-toggle');
+        // Placeholder for future JavaScript functionality
+        console.log("Website loaded successfully. Ready for user interaction.");
+        // here is the link
+        const DOWNLOAD_URL = "https://play.google.com/store/search?q=virtual%20master&c=apps&hl=en"; 
+        const modal = document.getElementById('customModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalActions = document.getElementById('modalActions');
 
-        // Show menu
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.add('is-open');
-            });
+        /**
+         * Utility to display the custom modal.
+         * @param {string} title - The title of the modal.
+         * @param {string} message - The main message content.
+         * @param {string} buttonsHtml - HTML content for the action buttons.
+         */
+        function displayModal(title, message, buttonsHtml) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalActions.innerHTML = buttonsHtml;
+            modal.classList.remove('invisible', 'opacity-0');
+            modal.classList.add('visible', 'opacity-100');
         }
 
-        // Hide menu
-        if (navClose) {
-            navClose.addEventListener('click', () => {
-                navMenu.classList.remove('is-open');
-            });
+        /**
+         * Utility to hide the custom modal.
+         */
+        function hideModal() {
+            modal.classList.remove('visible', 'opacity-100');
+            modal.classList.add('invisible', 'opacity-0');
+        }
+        
+        /**
+         * Shows the initial modal asking for the Android version.
+         */
+        function showVersionModal() {
+            const buttons = `
+                <button onclick="handleVersionSelection(false)"
+                        class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition duration-150">
+                <i class="fa-brands fa-android"></i>&nbsp; Under Android 13
+                </button>
+                <button onclick="handleVersionSelection(true)"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150">
+                <i class="fa-brands fa-android"></i>&nbsp; Up to Android 13
+                </button>
+            `;
+            // Note: The close button is now part of the static HTML structure, so we don't need to add it dynamically here.
+            displayModal("What is your Android version?", "You need X8 SANDBOX when your android version isn't 9 to 13.", buttons);
+        }
+
+        /**
+         * Handles the user's version selection from the modal.
+         * @param {boolean} isUpTo13 - True if 'Up to Android 13' was selected, False otherwise.
+         */
+        function handleVersionSelection(isUpTo13) {
+            hideModal(); // Close the question modal immediately
+            
+            if (isUpTo13) {
+                // Scenario 2: Up to Android 13 selected - Initiate Download
+                // Start a download by programmatically creating and clicking an anchor tag
+                const link = document.createElement('a');
+                link.href = DOWNLOAD_URL;
+                link.download = "X8 Sandbox"; // Suggest a file name
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Show success message
+                showResultModal(
+                    "Redirecting...", 
+                    "Your are redrecting to Google Play Store.", 
+                    "text-green-600"
+                );
+
+            } else {
+                // Scenario 1: Under Android 13 selected - Show 'No Need' message
+                showResultModal(
+                    "No Action Needed", 
+                    "Your current Android version is under 13, and this APK(sandbox) is not required for your device.", 
+                    "text-yellow-600"
+                );
+            }
+        }
+
+        /**
+         * Shows a modal with the final result (instead of a JS alert box).
+         * @param {string} title - The title of the result.
+         * @param {string} message - The message of the result.
+         * @param {string} colorClass - Tailwind text color class for the title.
+         */
+        function showResultModal(title, message, colorClass) {
+            const buttons = `
+                <button onclick="hideModal()"
+                        class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition duration-150">
+                    Close
+                </button>
+            `;
+            modalTitle.className = "text-xl font-semibold mb-4 " + colorClass; // Apply color class
+            displayModal(title, message, buttons);
+        }
+
+        function downloadAPK(url) 
+        {
+            console.log("Redirecting to: " + url);
+            window.location.href = url;
+            
         }
     </script>
 </body>
