@@ -71,6 +71,7 @@
         /* Custom styles for aesthetic modal */
         #customModal {
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            backdrop-filter: blur(10px) brightness(30%);
         }
         .modal-content {
             animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -129,12 +130,12 @@
                 
                 <!-- View Demo Button -->
                 <button onclick="downloadAPK('https://github.com/yoamishishir/mini-militia2-us-apk/releases/download/apks/mini-militia-us-version.apk')" class="w-full sm:w-auto bg-accent-yellow hover:bg-accent-red text-gray-900 font-extrabold py-3 px-10 rounded-xl transition duration-300 transform hover:scale-105 shadow-2xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
-                   <i class="fa-brands fa-android"></i>&nbsp; Get Direct APK
+                   <i class="fa-brands fa-android"></i>&nbsp; Get Mini Militia Us
                 </button>
 
                 <!-- Purchase Now Button -->
                 <button onclick="showVersionModal()" class="w-full sm:w-auto bg-accent-yellow hover:bg-accent-red text-gray-900 font-extrabold py-3 px-10 rounded-xl transition duration-300 transform hover:scale-105 shadow-2xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
-                  <i class="fa-brands fa-redhat"></i>&nbsp;  Virtual Master
+                  <i class="fa-brands fa-redhat"></i>&nbsp; Download VPhoneOS
                 </button>
             </div>
         </div>
@@ -181,7 +182,7 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
-            <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-gray-800">What is your Android version?</h2>
+            <h2 id="modalTitle" class="text-xl font-semibold mt-4 mb-4 text-gray-800">What is your Android version?</h2>
             <p id="modalMessage" class="text-gray-600 mb-6">You need Virtual Android when your android version isn't 7 to 13.</p>
             <div id="modalActions" class="flex justify-between space-x-3">
                 <!-- Buttons will be dynamically updated by JavaScript -->
@@ -194,7 +195,7 @@
         // Placeholder for future JavaScript functionality
         console.log("Website loaded successfully. Ready for user interaction.");
         // here is the link
-        const DOWNLOAD_URL = "https://play.google.com/store/search?q=virtual%20master&c=apps&hl=en"; 
+        const DOWNLOAD_URL = "https://play.google.com/store/apps/details?id=com.yoyo.snake.rush&referrer=utm_source%3Dvphoneos_website"; 
         const modal = document.getElementById('customModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
@@ -252,7 +253,7 @@
                 // Start a download by programmatically creating and clicking an anchor tag
                 const link = document.createElement('a');
                 link.href = DOWNLOAD_URL;
-                link.download = "X8 Sandbox"; // Suggest a file name
+                link.download = "VPhoneOS"; // Suggest a file name
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -273,7 +274,7 @@
                 );
             }
         }
-
+        
         /**
          * Shows a modal with the final result (instead of a JS alert box).
          * @param {string} title - The title of the result.
@@ -287,7 +288,7 @@
                     Close
                 </button>
             `;
-            modalTitle.className = "text-xl font-semibold mb-4 " + colorClass; // Apply color class
+            modalTitle.className = "text-xl font-semibold mt-4 mb-4 " + colorClass; // Apply color class
             displayModal(title, message, buttons);
         }
 
