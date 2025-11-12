@@ -109,7 +109,7 @@
             </a>
             <!-- Profile Button -->
             <button class="bg-accent-yellow hover:bg-accent-red text-gray-900 font-bold py-2 px-6 rounded-lg transition duration-300 shadow-xl focus:outline-none focus:ring-4 focus:ring-accent-yellow/50">
-                <a href="https://github.com/yoamishishir" target="_blank"><i class="fa-brands fa-github"></i>&nbsp;Profile</a>
+                <a href="https://github.com/yoamishishir/mini-militia2-us-apk/releases/tag/apks" target="_blank"><i class="fa-brands fa-github"></i>&nbsp;Releases</a>
             </button>
         </nav>
     </header>
@@ -147,15 +147,21 @@
             </p>
             
             <!-- Social Media Icons (Updated with inline-flex for perfect circles) -->
+                    
             <div class="flex space-x-4 order-1 sm:order-2">
-                <!-- Reddit -->
-                <a href="https://www.reddit.com/user/yoamishishir" aria-label="Twitter" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
-                    <i class="fa-brands fa-reddit-alien"></i>
+                <!-- Github -->
+                <a href="https://github.com/yoamishishir" aria-label="LinkedIn" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
+                    <i class="fa-brands fa-github"></i>
                 </a>
                 <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/in/threal-shishir" aria-label="LinkedIn" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
                     <i class="fab fa-linkedin-in text-lg"></i>
                 </a>
+                <!-- Reddit -->
+                <a href="https://www.reddit.com/user/yoamishishir" aria-label="Twitter" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
+                    <i class="fa-brands fa-reddit-alien"></i>
+                </a>
+
                 <!-- WhatsApp -->
                 <a href="https://wa.me/1824904854" aria-label="WhatsApp" target="_blank" style="padding: 1.5px 16px;" class="text-gray-900 hover:text-accent-red transition duration-300 bg-white/50 p-2 rounded-full shadow-md inline-flex justify-center items-center">
                     <i class="fab fa-whatsapp text-lg"></i>
@@ -176,7 +182,7 @@
             </button>
             
             <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-gray-800">What is your Android version?</h2>
-            <p id="modalMessage" class="text-gray-600 mb-6">You need Virtual Master when your android version isn't 9 to 13.</p>
+            <p id="modalMessage" class="text-gray-600 mb-6">You need Virtual Android when your android version isn't 7 to 13.</p>
             <div id="modalActions" class="flex justify-between space-x-3">
                 <!-- Buttons will be dynamically updated by JavaScript -->
             </div>
@@ -231,7 +237,7 @@
                 </button>
             `;
             // Note: The close button is now part of the static HTML structure, so we don't need to add it dynamically here.
-            displayModal("What is your Android version?", "You need X8 SANDBOX when your android version isn't 9 to 13.", buttons);
+            displayModal("What is your Android version?", "You need virtual android when your android version isn't 7 to 13.", buttons);
         }
 
         /**
@@ -254,7 +260,7 @@
                 // Show success message
                 showResultModal(
                     "Redirecting...", 
-                    "Your are redrecting to Google Play Store.", 
+                    "Your are redirecting to Google Play Store.", 
                     "text-green-600"
                 );
 
@@ -262,7 +268,7 @@
                 // Scenario 1: Under Android 13 selected - Show 'No Need' message
                 showResultModal(
                     "No Action Needed", 
-                    "Your current Android version is under 13, and this APK(sandbox) is not required for your device.", 
+                    "Your current Android version is under 13 or else, and this APK(virtual android) is not required for your device.", 
                     "text-yellow-600"
                 );
             }
